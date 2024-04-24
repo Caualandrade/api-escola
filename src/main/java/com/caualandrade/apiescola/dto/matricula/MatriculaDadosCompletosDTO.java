@@ -8,11 +8,21 @@ import com.caualandrade.apiescola.model.MatriculaModel;
 public record MatriculaDadosCompletosDTO(Long id,
                                          String nome_aluno,
                                          String nome_disciplina,
-                                         Float nota,
+                                         Double primeiraNota,
+                                         Double segundaNota,
+                                         Double terceiraNota,
+                                         Double notaTotal,
                                          StatusAluno statusAluno) {
 
     public MatriculaDadosCompletosDTO(MatriculaModel matriculaModel){
-        this(matriculaModel.getId(), matriculaModel.getAluno().getNome(),matriculaModel.getDisciplina().getNome(), matriculaModel.getNota(), matriculaModel.getSituacao());
+        this(matriculaModel.getId(),
+                matriculaModel.getAluno().getNome(),
+                matriculaModel.getDisciplina().getNome(),
+                matriculaModel.getPrimeiraNota(),
+                matriculaModel.getSegundaNota(),
+                matriculaModel.getTerceiraNota(),
+                matriculaModel.getTotalNota(),
+                matriculaModel.getStatus());
     }
 
 

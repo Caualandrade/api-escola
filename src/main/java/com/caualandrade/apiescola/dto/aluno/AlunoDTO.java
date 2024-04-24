@@ -5,5 +5,5 @@ import jakarta.validation.constraints.NotBlank;
 
 import java.util.List;
 
-public record AlunoDTO(@NotBlank String nome, List<MatriculaModel> matricula) {
+public record AlunoDTO(@NotBlank String nome, @NotBlank String email) {
 }

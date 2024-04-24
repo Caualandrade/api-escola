@@ -6,6 +6,5 @@ import jakarta.validation.constraints.NotBlank;
 import java.util.List;
 
 public record ProfessorDTO(@NotBlank String nome,
-                           @NotBlank String email,
-                           List<DisciplinaModel> disciplinas) {
+                           @NotBlank String email) {
 }

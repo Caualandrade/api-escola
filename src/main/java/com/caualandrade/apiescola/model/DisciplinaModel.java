@@ -21,12 +21,10 @@ public class DisciplinaModel {
 
     @ManyToOne
     @JoinColumn(name = "id_professor")
-    //@JsonBackReference
     @JsonIgnore
     private ProfessorModel professor;
 
     @OneToMany(mappedBy = "disciplina")
-    //@JsonManagedReference
     private List<MatriculaModel> matricula;
 
     public DisciplinaModel() {

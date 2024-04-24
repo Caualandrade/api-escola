@@ -2,6 +2,7 @@ package com.caualandrade.apiescola.service;
 
 import com.caualandrade.apiescola.dto.matricula.MatriculaDTO;
 import com.caualandrade.apiescola.dto.matricula.MatriculaDadosCompletosDTO;
+import com.caualandrade.apiescola.infra.StatusAluno;
 import com.caualandrade.apiescola.model.MatriculaModel;
 import com.caualandrade.apiescola.repository.AlunoRepository;
 import com.caualandrade.apiescola.repository.DisciplinaRepository;
@@ -26,19 +27,26 @@ public class MatriculaService {
         this.matriculaRepository = matriculaRepository;
     }
 
-    public MatriculaModel insertMatricula(MatriculaDTO matriculaDTO){
+    public MatriculaModel insertMatricula(MatriculaDTO matriculaDTO) {
+
         var matricula = new MatriculaModel();
         var aluno = alunoRepository.findById(matriculaDTO.id_aluno()).get();
         var disciplina = disciplinaRepository.findById(matriculaDTO.id_disciplina()).get();
+
         matricula.setAluno(aluno);
         matricula.setDisciplina(disciplina);
-        matricula.setNota(matriculaDTO.nota());
-        matricula.setSituacao(matriculaDTO.statusAluno());
+        matricula.setPrimeiraNota(0.0);
+        matricula.setSegundaNota(0.0);
+        matricula.setTerceiraNota(0.0);
+        matricula.setTotalNota(matricula.calcularNotaTotal(matricula.getPrimeiraNota(), matricula.getSegundaNota(), matricula.getTerceiraNota()));
+        matricula.setStatus(StatusAluno.valueOf("NAO_APROVADO"));
+
         matriculaRepository.save(matricula);
+
         return matricula;
     }
 
-    public Page<MatriculaDadosCompletosDTO> getAllMatriculas(Pageable pageable){
+    public Page<MatriculaDadosCompletosDTO> getAllMatriculas(Pageable pageable) {
         return matriculaRepository.findAll(pageable).map(MatriculaDadosCompletosDTO::new);
     }
 
