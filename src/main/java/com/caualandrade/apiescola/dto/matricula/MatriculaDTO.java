@@ -8,7 +8,6 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
 public record MatriculaDTO(@NotNull Long id_aluno,
-                           @NotNull Long id_disciplina,
-                           Float nota,
-                           StatusAluno statusAluno) {
+                           @NotNull Long id_disciplina
+                           ) {
 }

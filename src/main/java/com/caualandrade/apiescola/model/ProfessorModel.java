@@ -9,6 +9,7 @@ import org.springframework.beans.BeanUtils;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.SimpleTimeZone;
 
 @Entity(name = "professor")
 @Table(name = "professores")
@@ -25,7 +26,6 @@ public class ProfessorModel {
     private String email;
 
     @OneToMany(mappedBy = "professor")
-    //@JsonManagedReference
     private List<DisciplinaModel> disciplinas;
 
     public ProfessorModel() {
@@ -66,16 +66,16 @@ public class ProfessorModel {
         return disciplinas;
     }
 
-    /*
-    public List<DisciplinaDadosParaProfessorDTO> getDisciplinaIdNome(){
-        List<DisciplinaDadosParaProfessorDTO> disciplinasDTO = new ArrayList<>();
-        BeanUtils.copyProperties(disciplinas, disciplinasDTO);
-        return disciplinasDTO;
-    }
-     */
-
     public void setDisciplinas(List<DisciplinaModel> disciplinas) {
         this.disciplinas = disciplinas;
+    }
+
+    public List<String> nomeDasDisciplinas(){
+        List<String> nomeDasDisciplinas = new ArrayList<>();
+        for (DisciplinaModel disciplina : disciplinas) {
+            nomeDasDisciplinas.add(disciplina.getNome());
+        }
+        return nomeDasDisciplinas;
     }
 
     @Override

@@ -3,6 +3,7 @@ package com.caualandrade.apiescola.model;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
 
 import java.util.List;
 import java.util.Objects;
@@ -18,13 +19,24 @@ public class AlunoModel {
     @Column(name = "nome")
     private String nome;
 
+    @Email
+    @Column(name = "email")
+    private String email;
+
     @OneToMany(mappedBy = "aluno")
-    //@JsonManagedReference
     private List<MatriculaModel> matricula;
 
-    public AlunoModel(Long id, String nome) {
+    public AlunoModel(Long id, String nome, String email, List<MatriculaModel> matricula) {
         this.id = id;
         this.nome = nome;
+        this.email = email;
+        this.matricula = matricula;
+    }
+
+    public AlunoModel(Long id, String nome, String email) {
+        this.id = id;
+        this.nome = nome;
+        this.email = email;
     }
 
     public AlunoModel() {
@@ -52,6 +64,14 @@ public class AlunoModel {
 
     public void setMatricula(List<MatriculaModel> matricula) {
         this.matricula = matricula;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     @Override

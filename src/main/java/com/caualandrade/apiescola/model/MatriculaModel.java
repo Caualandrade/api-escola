@@ -9,7 +9,7 @@ import jakarta.persistence.*;
 import java.util.Objects;
 
 @Entity(name = "matricula")
-@Table(name = "tb_matricula")
+@Table(name = "matriculas")
 public class MatriculaModel {
 
     @Id
@@ -18,29 +18,36 @@ public class MatriculaModel {
 
     @ManyToOne
     @JoinColumn(name = "id_aluno")
-    //@JsonBackReference
     @JsonIgnore
     private AlunoModel aluno;
 
     @ManyToOne
     @JoinColumn(name = "id_disciplina")
-    //@JsonBackReference
     @JsonIgnore
     private DisciplinaModel disciplina;
 
-    private Float nota;
+    private Double primeiraNota;
 
-    private StatusAluno situacao;
+    private Double segundaNota;
+
+    private Double terceiraNota;
+
+    private Double totalNota;
+
+    private StatusAluno status;
 
     public MatriculaModel() {
     }
 
-    public MatriculaModel(Long id, AlunoModel aluno, DisciplinaModel disciplina, Float nota, StatusAluno situacao) {
+    public MatriculaModel(Long id, AlunoModel aluno, DisciplinaModel disciplina, Double primeiraNota, Double segundaNota, Double terceiraNota, Double totalNota, StatusAluno status) {
         this.id = id;
         this.aluno = aluno;
         this.disciplina = disciplina;
-        this.nota = nota;
-        this.situacao = situacao;
+        this.primeiraNota = primeiraNota;
+        this.segundaNota = segundaNota;
+        this.terceiraNota = terceiraNota;
+        this.totalNota = totalNota;
+        this.status = status;
     }
 
     public Long getId() {
@@ -67,20 +74,52 @@ public class MatriculaModel {
         this.disciplina = disciplina;
     }
 
-    public Float getNota() {
-        return nota;
+    public Double getPrimeiraNota() {
+        return primeiraNota;
     }
 
-    public void setNota(Float nota) {
-        this.nota = nota;
+    public void setPrimeiraNota(Double primeiraNota) {
+        this.primeiraNota = primeiraNota;
     }
 
-    public StatusAluno getSituacao() {
-        return situacao;
+    public Double getSegundaNota() {
+        return segundaNota;
     }
 
-    public void setSituacao(StatusAluno situacao) {
-        this.situacao = situacao;
+    public void setSegundaNota(Double segundaNota) {
+        this.segundaNota = segundaNota;
+    }
+
+    public Double getTerceiraNota() {
+        return terceiraNota;
+    }
+
+    public void setTerceiraNota(Double terceiraNota) {
+        this.terceiraNota = terceiraNota;
+    }
+
+    public Double getTotalNota() {
+        return totalNota;
+    }
+
+    public void setTotalNota(Double totalNota) {
+        this.totalNota = totalNota;
+    }
+
+    public StatusAluno getStatus() {
+        return status;
+    }
+
+    public void setStatus(StatusAluno status) {
+        this.status = status;
+    }
+
+    public Double calcularNotaTotal(Double primeiraNota, Double segundaNota, Double terceiraNota){
+        var notaTotal = (primeiraNota + segundaNota + terceiraNota)/3;
+        if(notaTotal>=6){
+            this.setStatus(StatusAluno.valueOf("APROVADO"));
+        }
+        return notaTotal;
     }
 
     @Override
