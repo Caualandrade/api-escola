@@ -6,10 +6,10 @@ import com.caualandrade.apiescola.model.ProfessorModel;
 
 import java.util.List;
 
-public record ProfessorDadosCompletoDTO(Long id, String nome, String email, List<String> disciplinas) {
+public record ProfessorDadosCompletoDTO(Long id, String nome, String email, List<DisciplinaModel> disciplinas) {
 
     public ProfessorDadosCompletoDTO(ProfessorModel professorModel) {
-        this(professorModel.getId(), professorModel.getNome(), professorModel.getEmail(),professorModel.nomeDasDisciplinas());
+        this(professorModel.getId(), professorModel.getNome(), professorModel.getEmail(), professorModel.getDisciplinas());
     }
 
 }

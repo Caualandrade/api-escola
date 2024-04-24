@@ -45,11 +45,11 @@ public class AlunoService {
         alunoRepository.delete(aluno);
     }
 
-    public AlunoModel updateAlunoById(Long id, AlunoDTO alunoDTO){
+    public AlunoDadosCompletoDTO updateAlunoById(Long id, AlunoDTO alunoDTO){
         var aluno = alunoRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Aluno com ID " + id + " não encontrado."));
         BeanUtils.copyProperties(alunoDTO,aluno);
         alunoRepository.save(aluno);
-        return aluno;
+        return new AlunoDadosCompletoDTO(aluno);
     }
 
     public Boolean emailExistente(String email){
