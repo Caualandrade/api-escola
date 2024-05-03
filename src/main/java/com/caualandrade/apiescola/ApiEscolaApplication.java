@@ -6,7 +6,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-@OpenAPIDefinition(info = @Info(title = "api-escola",version = "1",description = "API desenvolvida para estudo, aplicada em um cenario academico"))
+@OpenAPIDefinition(info = @Info(title = "api-escola",version = "1",description = "API desenvolvida para praticar os estudos. Simula um cenário acadêmico"))
 public class ApiEscolaApplication {
 
 	public static void main(String[] args) {
