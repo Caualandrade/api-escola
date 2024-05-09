@@ -5,10 +5,10 @@ import com.caualandrade.apiescola.model.ProfessorModel;
 
 import java.util.List;
 
-public record DisciplinaDadosCompletosDTO(Long id, String disciplinaNome, String professorNome) {
+public record DisciplinaDadosCompletosDTO(Long id, String disciplinaNome, ProfessorModel professorNome) {
 
     public DisciplinaDadosCompletosDTO(DisciplinaModel disciplinaModel){
-        this(disciplinaModel.getId(), disciplinaModel.getNome(), disciplinaModel.getProfessor().getNome());
+        this(disciplinaModel.getId(), disciplinaModel.getNome(), disciplinaModel.getProfessor());
     }
 
 }
